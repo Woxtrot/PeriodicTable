@@ -1,7 +1,7 @@
 # Made by Wessel Eikelboom (S2565196) for the Python assignment in the PiE course.
 # Mechanical Engineering, Faculty of Engineering Technology, University of Twente
 
-from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout
+from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QDesktopWidget
 
 from config import WINDOW_WIDTH, WINDOW_HEIGHT
 from data_loader import load_data
@@ -18,7 +18,7 @@ class PeriodicTable(QMainWindow):  # inherit from QMainWindow
 
         # Set window title and dimensions
         self.setWindowTitle('Periodic Table')
-        self.setGeometry(100, 100, int(WINDOW_WIDTH), int(WINDOW_HEIGHT))
+        self.setGeometry(0, 0, int(WINDOW_WIDTH), int(WINDOW_HEIGHT))
         self.setMinimumSize(900, 450)  # Set minimum width and height to ensure readability when the user scales the window
         # Create a central widget for the content of the window
         central_widget = QWidget(self)
@@ -34,9 +34,19 @@ class PeriodicTable(QMainWindow):  # inherit from QMainWindow
         # Create an instance to display element information
         self.element_info_window = None
 
+        self.center_on_screen()
+
+    def center_on_screen(self): # Based on: https://pythonprogramminglanguage.com/pyqt5-center-window/
+        # Get the main window's geometry
+        window = self.frameGeometry()
+        # Get the screen resolution and center the window on the screen
+        centerPoint = QDesktopWidget().availableGeometry().center()
+        window.moveCenter(centerPoint)
+        self.move(window.topLeft())
     # This function is responsbile of opening the element information window, it's input is the current instance and element data
     def open_element_info(self, element_data):
         # It creates an instance of the ElementInfoWindow class to which it passes the element data
         # In this class the element information window is created
         self.element_info_window = ElementInfoWindow(element_data)
         self.element_info_window.show() # Newly created element information window is displayed to the user
+        # Centering is not required as a Qdialog window centers on the parent window, which is in this case already centered
