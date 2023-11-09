@@ -28,7 +28,7 @@ class ElementInfoWindow(QDialog): # inherit from QDialog
         # Iterate through the element data and create labels for each key-value pair
         for row, (key, value) in enumerate(element_data.items()):
             if value:  # Exclude nan/empty values
-                key = ' '.join(re.findall(r'[A-Z][a-z]*', key)) #split CamelCase from: https://www.geeksforgeeks.org/python-split-camelcase-string-to-individual-strings/
+                key = ' '.join(re.findall(r'[A-Z](?:[a-z]+|[A-Z]*(?=[A-Z]|$))', key)) #split CamelCase from: https://www.geeksforgeeks.org/python-split-camelcase-string-to-individual-strings/
                 if "Numberof" in key:
                     key = key.replace("Numberof", "Number of")
 
