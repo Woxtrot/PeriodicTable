@@ -35,7 +35,7 @@ class PeriodicTable(QMainWindow):  # inherit from QMainWindow
         self.element_info_window = None
 
         self.center_on_screen()
-
+    # This function center the main window on the screen irrespective of screen resolution, its input is the current instance.
     def center_on_screen(self): # Based on: https://pythonprogramminglanguage.com/pyqt5-center-window/
         # Get the main window's geometry
         window = self.frameGeometry()
@@ -43,7 +43,9 @@ class PeriodicTable(QMainWindow):  # inherit from QMainWindow
         centerPoint = QDesktopWidget().availableGeometry().center()
         window.moveCenter(centerPoint)
         self.move(window.topLeft())
-    # This function is responsbile of opening the element information window, it's input is the current instance and element data
+
+    # This function is responsbile of creating an instance for the ElementInfoWindow class, which in turn opens the element information window
+    # its input is the current instance and element data
     def open_element_info(self, element_data):
         # It creates an instance of the ElementInfoWindow class to which it passes the element data
         # In this class the element information window is created

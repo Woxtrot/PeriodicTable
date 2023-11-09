@@ -71,16 +71,19 @@ class PeriodicTableCanvas(FigureCanvas): # inherit from FigureCanvas
         element_data = list(self.data.values())[element_index] # assign element's data
         self.parent_instance.open_element_info(element_data) # call open_element_info function to open information window
 
-    def calculate_position(self, element):  # dealing with the Lanthanide and Actinide rows
+
+    def calculate_position(self, element):
+        # This function calculates the location of the element boxes based on the group and period from the data file
+        # For Lathanides and Actinides the atomic number and a standard defined row are used
         atomic_number = int(element['AtomicNumber'])
         if 57 <= atomic_number <= 71:  # Lathanides
             group = atomic_number - 57 + 4  # x position is determined through atomic number as opposed to group from csv
             period = 8  # y position is set for the Lathanide group to be underneath the rest of the table
-            spacing_y = 0.125  # some extra spacing is applied 0.125 instead of 0.1 to distinguish these two rows from the rest of the table
+            spacing_y = SPACING * 1.25  # some extra spacing is applied 0.125 instead of 0.1 to distinguish these two rows from the rest of the table
         elif 89 <= atomic_number <= 103:  # Actinides
             group = atomic_number - 89 + 4
             period = 9
-            spacing_y = 0.125
+            spacing_y = SPACING * 1.25
         else:  # rest of the elements
             group = int(element['Group'])  # x position determined through group from csv
             period = int(element['Period'])  # y position determined through period from csv

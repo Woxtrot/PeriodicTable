@@ -6,7 +6,7 @@
 # Constants for positioning and sizing
 TABLE_WIDTH = 18 * (4 / 3)
 TABLE_HEIGHT = 9 * (4 / 3)
-ELEMENT_SIZE = 1.05
+ELEMENT_SIZE = 1
 MARGIN = 0.1
 SPACING = 0.1
 WINDOW_WIDTH = TABLE_WIDTH * ELEMENT_SIZE * 60
@@ -14,6 +14,8 @@ WINDOW_HEIGHT = TABLE_HEIGHT * ELEMENT_SIZE * 60
 
 # Defining csv file path
 csv_file_path = 'FIXED_periodic_table_of_elements.csv'
+# Some errors in the original csv file were fixed in the FIXED_ version
+# Please consult the report for more detail
 
 # Dictionary with colors to distinguish element categories
 category_colors = {
